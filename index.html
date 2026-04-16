@@ -23,7 +23,15 @@
 
     <style>
         /* 👉 accessibility - add visual improvements */
-
+	.active {
+		transform: scale(1.1); 
+	}
+    .option:hover,
+	.option:focus {
+		box-shadow: none;
+		-webkit-box-shadow: none;
+		outline: none;
+	}
 
     </style>
 
@@ -41,7 +49,7 @@
         <div class="row">
             <div class="col-2">
                 <!-- 👉 add tabindex to these div.option elements -->
-                <div class="option rose" data-percentage="15">15%</div>
+                <div class="option rose" data-percentage="15" tabindex="0">15%</div>
 			</nav>
             <div class="col-2">
                 <div class="option green" data-percentage="23">23%</div>
@@ -105,6 +113,13 @@
         setActive(0);
         // show users below menu
         displayUsers(userCount, 0);
+
+		options.forEach(function (element, index) {
+			element.addEventListener("focus", () => {
+				setActive(index);
+				displayUsers(userCount, index);
+			});
+		});
 
     </script>
 </body>
